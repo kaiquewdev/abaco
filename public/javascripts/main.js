@@ -28,13 +28,18 @@ require([
             },
 
             randomSignal: function () {
-                var id = Math.round( Math.random() * this.get('signals').length );    
+                var self = this,
+                    signals = self.get('signals'),
+                    id = Math.rount( Math.random() * signals.length );
 
-                return this.get('signals')[ id ];
+                return signals[ id ];
             },
 
             randomNumber: function () {
-                return Math.round( Math.random() * this.get('limit') );
+                var self = this,
+                    limit = self.get('limit');
+
+                return Math.round( Math.random() * limit );
             },
 
             sum: function ( a, b ) {
@@ -53,18 +58,23 @@ require([
                 return a * b;    
             },
 
-            expression: function ( a, operator, b ) {
-                var output = 0,
+            operations: function ( operator, a, b ) {
+                var self = this,
                     operations = {
-                        '+': this.sum,
-                        '-': this.sub,
-                        '÷': this.div,
-                        'x': this.mult
-                    };
+                        '+': self.sum,
+                        '-': self.sub,
+                        '÷': self.div,
+                        'x': self.mult     
+                };    
 
-                output = operations[ operator ]( Number( a ), Number( b ) ); 
+                return operations[ operator ]( a, b );
+            },
 
-                return output;
+            expression: function ( a, operator, b ) {
+                var self = this,
+                    operations = self.operations;
+
+                return operations( operator, a, b );
             },
 
             label: function ( a, operator, b ) {
@@ -74,31 +84,35 @@ require([
             },
 
             answer: function ( a, operator, b ) {
-                return this.expression(
-                    a,
-                    operator,
-                    b
-                );    
+                var self = this,
+                    expression = self.expression;
+
+                return expression( a, operator, b );
             },
 
-            newChallenge: function () {
-                var output = {
-                        label: '',
-                        answer: 0
-                    },
-                    expression = [
-                        this.randomNumber(),
-                        this.randomSignal(),
-                        this.randomNumber()
-                    ];
+            mountExpression: function () {
+                var self = this,
+                    output = [];
 
-                output['label'] = this.label(
+                output.push( self.randomNumber() );
+                output.push( self.randomSignal() );
+                output.push( self.randomNumber() );
+
+                return output;
+            };
+
+            newChallenge: function () {
+                var self = this,
+                    output = { label: '', answer: 0 },
+                    expression = self.mountExpression();
+
+                output['label'] = self.label(
                     expression[0],
                     expression[1],
                     expression[2]
                 ); 
 
-                output['answer'] = this.answer(
+                output['answer'] = self.answer(
                     expression[0],
                     expression[1],
                     expression[2]
