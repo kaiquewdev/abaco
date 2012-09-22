@@ -161,16 +161,49 @@ require([
                 led.html( app.abacoModel.get('label') );
             },
 
+            colorTime: 700,
+
+            correct: function () {
+                var abaco = $('.abaco'),
+                    led = abaco.find('.led h2'),
+                    storedColor = led.css('color');
+
+                led.addClass( 'correct' ).removeClass('incorrect');
+                
+                setTimeout(function () {
+                    led.removeClass('correct');
+                }, this.colorTime );
+            },
+
+            incorrect: function () {
+                var abaco = $('.abaco'),
+                    led = abaco.find('.led h2'),
+                    storedColor = led.css('color');
+
+                led.addClass( 'incorrect' ).removeClass('correct');
+                
+                setTimeout(function () {
+                    led.removeClass('incorrect');
+                }, this.colorTime );
+            },
+
             next: function ( e ) {
                 var abaco = $('.abaco'),
                     led = abaco.find('.led h2'),
                     userAnswer = $('#answer-input'); 
 
-                if ( 13 === e.keyCode ) {
-                    if ( userAnswer.val() ) {
-                        var comparison = userAnswer.val() === app.abacoModel.get('answer').toString();
+                if ( 'keyCode' in e && 13 === e.keyCode || !( 'keyCode' in e ) ) {
+                    var response = userAnswer.val(),
+                        answer = app.abacoModel.get('answer');
 
-                        alert( ( comparison && 'Correct!' ) || 'Incorrect!' );
+                    if ( response ) {
+                        var comparison = ( response === answer.toString() );
+
+                        if ( comparison ) {
+                            this.correct();
+                        } else {
+                            this.incorrect();    
+                        }
 
                         app.abacoModel.start();
                         led.html( app.abacoModel.get('label') );
