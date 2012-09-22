@@ -28,16 +28,14 @@ require([
             },
 
             randomSignal: function () {
-                var self = this,
-                    signals = self.get('signals'),
-                    id = Math.rount( Math.random() * signals.length );
+                var signals = this.get('signals'),
+                    id = Math.round( Math.random() * signals.length );
 
                 return signals[ id ];
             },
 
             randomNumber: function () {
-                var self = this,
-                    limit = self.get('limit');
+                var limit = this.get('limit');
 
                 return Math.round( Math.random() * limit );
             },
@@ -59,22 +57,18 @@ require([
             },
 
             operations: function ( operator, a, b ) {
-                var self = this,
-                    operations = {
-                        '+': self.sum,
-                        '-': self.sub,
-                        '÷': self.div,
-                        'x': self.mult     
+                var fn = {
+                    '+': this.sum,
+                    '-': this.sub,
+                    '÷': this.div,
+                    'x': this.mult     
                 };    
 
-                return operations[ operator ]( a, b );
+                return fn[ operator ]( a, b );
             },
 
             expression: function ( a, operator, b ) {
-                var self = this,
-                    operations = self.operations;
-
-                return operations( operator, a, b );
+                return this.operations( operator, a, b );
             },
 
             label: function ( a, operator, b ) {
@@ -84,35 +78,30 @@ require([
             },
 
             answer: function ( a, operator, b ) {
-                var self = this,
-                    expression = self.expression;
-
-                return expression( a, operator, b );
+                return this.expression( a, operator, b );
             },
 
             mountExpression: function () {
-                var self = this,
-                    output = [];
+                var output = [];
 
-                output.push( self.randomNumber() );
-                output.push( self.randomSignal() );
-                output.push( self.randomNumber() );
+                output.push( this.randomNumber() );
+                output.push( this.randomSignal() );
+                output.push( this.randomNumber() );
 
                 return output;
-            };
+            },
 
             newChallenge: function () {
-                var self = this,
-                    output = { label: '', answer: 0 },
-                    expression = self.mountExpression();
+                var output = { label: '', answer: 0 },
+                    expression = this.mountExpression();
 
-                output['label'] = self.label(
+                output['label'] = this.label(
                     expression[0],
                     expression[1],
                     expression[2]
                 ); 
 
-                output['answer'] = self.answer(
+                output['answer'] = this.answer(
                     expression[0],
                     expression[1],
                     expression[2]
@@ -145,7 +134,7 @@ require([
 
                 template = _.template( template, {
                     led: {
-                        label: 'Start?'
+                        label: 'Click here to start the challenge!'
                     }  
                 });
 
@@ -185,7 +174,7 @@ require([
         window.app = {};
 
         app.abacoModel = new AbacoModel;
-
+        app.abacoCollection = new AbacoCollection;
         app.abaco = new AbacoView({
             el: '.abaco'    
         });

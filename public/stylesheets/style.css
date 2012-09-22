@@ -1,6 +1,51 @@
 body {
-  padding: 50px 25px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: #2e2e2e;
+    padding: 50px 25px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: #f2f2f2;
+}
+
+h1 {
+    font-size: 50px;    
+}
+
+.main-content header {
+    text-align: center;    
+}
+
+hr {
+    border: none;
+    background: none;
+    border-top: 1px solid #f2f2f2;
+}
+
+.middle {
+    margin: 0 auto;    
+}
+
+.abaco {
+    width: 400px;
+}
+
+.abaco .led {
+    text-align: center;    
+}
+
+.answer {
+    padding: 10px 10px;
+    margin: 0 auto;
+}
+
+.answer input[type='text'] {
+    border: 1px solid #ccc;
+    height: 28px;
+    min-width: 250px;
+    padding: 5px 10px;
+    margin: 0 5px 0 0;
+}
+
+.answer button[type='button'] {
+    padding: 10px 20px;    
 }
 
 .start {

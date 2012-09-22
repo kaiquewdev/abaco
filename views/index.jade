@@ -5,12 +5,12 @@ block content
         header
             h1= title
         hr
-        div.abaco
+        div.abaco.middle
 
 block append script
     script(type='text/template', id='abaco-screen')
         div.led
             h2.start <%= led.label %>
-        div.answare
-            input(type='input', id='answer-input')
+        div.answer
+            input(type='text', id='answer-input')
             button(type='button', id='answer-button')= 'Respond'
