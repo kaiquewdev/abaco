@@ -207,6 +207,10 @@ require([
 
                         app.abacoModel.start();
                         led.html( app.abacoModel.get('label') );
+
+                        userAnswer.val('');
+                        userAnswer.focus();
+
                     } else {
                         alert('Please give a answer!');    
                     }
