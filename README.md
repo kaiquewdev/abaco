@@ -11,7 +11,7 @@ use:
 
 after:
     
-    make run
+    make run or npm start
 
 to install and run server.
 
