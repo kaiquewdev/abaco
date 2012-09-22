@@ -6,12 +6,6 @@
             label: 'Start?',
             answer: null,
             limit: 20,
-            signals: [
-                '+',
-                '-',
-                '÷',
-                'x'
-            ]
         },
 
         start: function () {
