@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "express": "2.x.x",
-    "jade": "*",
+    "jade": "*"
   },
   "engine": {
     "node": "*",
