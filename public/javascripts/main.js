@@ -54,18 +54,15 @@ require([
             },
 
             expression: function ( a, operator, b ) {
-                var output = 0;
+                var output = 0,
+                    operations = {
+                        '+': this.sum,
+                        '-': this.sub,
+                        '÷': this.div,
+                        'x': this.mult
+                    };
 
-                switch ( operator ) {
-                    case '+':    
-                        output = this.sum( Number( a ), Number( b ) ); 
-                    case '-':    
-                        output = this.sub( Number( a ), Number( b ) ); 
-                    case '÷':    
-                        output = this.div( Number( a ), Number( b ) ); 
-                    case 'x':    
-                        output = this.mult( Number( a ), Number( b ) ); 
-                }
+                output = operations[ operator ]( Number( a ), Number( b ) ); 
 
                 return output;
             },
