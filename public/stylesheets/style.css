@@ -1,12 +1,35 @@
 body {
-    background: #2e2e2e;
+    background: #f2f2f2;
     padding: 50px 25px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    color: #f2f2f2;
+    color: #2e2e2e;
+}
+
+.btn {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:transparent;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:10px 30px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.btn:active {
+	position:relative;
+	top:1px;
 }
 
 h1 {
     font-size: 50px;    
+    text-shadow: 0 2px 2px #000;
 }
 
 .main-content header {
@@ -16,7 +39,7 @@ h1 {
 hr {
     border: none;
     background: none;
-    border-top: 1px solid #f2f2f2;
+    border-top: 1px solid #ccc;
 }
 
 .middle {
@@ -24,15 +47,21 @@ hr {
 }
 
 .abaco {
-    width: 400px;
+    width: 415px;
+    padding: 15px 0;
 }
 
 .abaco .led {
     text-align: center;    
+    padding: 15px 0;
+}
+
+.abaco .led h2 {
+    font-size: 25px;    
 }
 
 .answer {
-    padding: 10px 10px;
+    padding: 10px 0;
     margin: 0 auto;
 }
 
@@ -42,10 +71,6 @@ hr {
     min-width: 250px;
     padding: 5px 10px;
     margin: 0 5px 0 0;
-}
-
-.answer button[type='button'] {
-    padding: 10px 20px;    
 }
 
 .start {

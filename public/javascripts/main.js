@@ -9,7 +9,7 @@ require([
             defaults: {
                 label: 'Start?',
                 answer: null,
-                limit: 11,
+                limit: 20,
                 signals: [
                     '+',
                     '-',
@@ -27,9 +27,18 @@ require([
                 });    
             },
 
+            random: function ( len ) {
+                return Math.round( Math.random() * len );    
+            },
+
             randomSignal: function () {
                 var signals = this.get('signals'),
-                    id = Math.round( Math.random() * signals.length );
+                    signalsLength = signals.length;
+                    id = this.random( signalsLength );
+
+                if ( id >= signalsLength ) {
+                    id = this.random( signalsLength );    
+                }
 
                 return signals[ id ];
             },
@@ -37,7 +46,7 @@ require([
             randomNumber: function () {
                 var limit = this.get('limit');
 
-                return Math.round( Math.random() * limit );
+                return this.random( limit );
             },
 
             sum: function ( a, b ) {
@@ -122,7 +131,8 @@ require([
 
             events: {
                 'click .start': 'start',
-                'click #answer-button': 'next'
+                'click #answer-button': 'next',
+                'keypress #answer-input': 'next'
             },
 
             initialize: function () {
@@ -151,26 +161,27 @@ require([
                 led.html( app.abacoModel.get('label') );
             },
 
-            next: function () {
+            next: function ( e ) {
                 var abaco = $('.abaco'),
                     led = abaco.find('.led h2'),
                     userAnswer = $('#answer-input'); 
 
-                if ( userAnswer.val() ) {
-                    if ( app.abacoModel.get('answer').toString() === userAnswer.val() ) {
-                        alert( 'Correct!' );
-                    } else {
-                        alert( 'Incorrect!' );    
-                    }
+                if ( 13 === e.keyCode ) {
+                    if ( userAnswer.val() ) {
+                        var comparison = userAnswer.val() === app.abacoModel.get('answer').toString();
 
-                    app.abacoModel.start();
-                    led.html( app.abacoModel.get('label') );
-                } else {
-                    alert('Please give a answer!');    
-                } 
+                        alert( ( comparison && 'Correct!' ) || 'Incorrect!' );
+
+                        app.abacoModel.start();
+                        led.html( app.abacoModel.get('label') );
+                    } else {
+                        alert('Please give a answer!');    
+                    }
+                }
             }
         }); 
 
+        // Abaco app
         window.app = {};
 
         app.abacoModel = new AbacoModel;
