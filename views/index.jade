@@ -1,4 +1,15 @@
 extends layout
 
 block content
-    h1= 'アバコ'
+    section.main-content
+        header
+            h1= title
+        div.abaco
+
+block append script
+    script(type='text/template', id='abaco-screen')
+        div.led
+            h2= '<%= led.label %>'
+        div.answare
+            input(type='input', id='answare-input')
+            button(type='button', id='answare-button')= 'Respond'
