@@ -117,7 +117,22 @@ require([
             },
 
             next: function () {
-                
+                var abaco = $('.abaco'),
+                    led = abaco.find('.led h2'),
+                    userAnswer = $('#answer-input'); 
+
+                if ( userAnswer.val() ) {
+                    if ( app.abacoModel.get('answer').toFixed(2) === userAnswer.val() ) {
+                        alert( 'Correct!' );
+                    } else {
+                        alert( 'Incorrect!' );    
+                    }
+
+                    app.abacoModel.start();
+                    led.html( app.abacoModel.get('label') );
+                } else {
+                    alert('Please give a answer!');    
+                } 
             }
         }); 
 
