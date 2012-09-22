@@ -12,3 +12,12 @@ use:
 after:
     
     make run
+
+to install and run server.
+
+-------------------------------------
+
+License
+-------
+
+FreeBSD License
